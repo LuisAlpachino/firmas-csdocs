@@ -19,7 +19,6 @@ $router->get('/', function () use ($router) {
 
 $router->get('/key', function () use ($router){
    return  base64_encode(Str::random(32));
-
 });
 
 //Rutas para CRUD USERS
