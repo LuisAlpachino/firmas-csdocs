@@ -17,7 +17,7 @@ class DocumentController extends Controller
         return response()->json(Documents::all());
     }
 
-    public function getDocumentsById($id){
+    public function getDocumentById($id){
         return response()->json(Documents::find($id));
     }
 

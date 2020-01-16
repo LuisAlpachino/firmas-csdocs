@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Str;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,33 +12,25 @@
 */
 
 /** @var TYPE_NAME $router */
-/*$router->get('/', function () use ($router) {
+
+$router->get('/', function () use ($router) {
     return "Efirmas-csdocs";
-});*/
-// API route group estados
-/*$router->group(['prefix' => 'estados'], function () use ($router) {
-    // Matches "/api/estados
-
-    $router->get('view','EstadosController@view');
-   // $router->post('register', 'UsuariosController@create');
-    $router->post('insert','EstadosController@insertStates');
-
-    $router->get('view/{id}','EstadosController@viewid');
-
-    $router->delete('delete/{id}','EstadosController@delete');
-
-    $router->put('update/{id}','EstadosController@update');
 });
-*/
+
+$router->get('/key', function () use ($router){
+   return  base64_encode(Str::random(32));
+
+});
+
 //Rutas para CRUD USERS
-$router->group(['prefix' => 'user'], function() use ($router){
+$router->group(['prefix' => 'user', 'middleware' => ['auth']], function() use ($router){
    //url "/user/"
-    $router->post('insert','UserController@insert');
+    $router->post('setUser','UserController@setUser');
+    $router->post('login', 'UserController@getToken');
     $router->get('getUsers', 'UserController@getUsers');
     $router->get('getUsers/{id}', 'UserController@getUserById');
     $router->put('update/{id}', 'UserController@updateById');
     $router->delete('delete/{id}', 'UserController@deleteById');
-
 });
 
 //Rutas para CRUD DOCUMENTS
@@ -51,6 +43,14 @@ $router->group(['prefix' => 'documents'], function() use ($router){
     $router->delete('delete/{id}', 'DocumentController@deleteById');
 
 });
+
+//Apis Externas
+$router->group(['prefix' => 'api'], function() use ($router){
+    //url "/api/"
+    $router->get('rfc/{id}','ApisExternaController@rfc');
+    $router->get('cp/{id}','ApisExternaController@cp');
+});
+
 
 
 

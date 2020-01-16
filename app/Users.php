@@ -17,9 +17,12 @@ class Users extends Model
         'second_last_name',
         'rfc',
         'curp',
+        'email',
+        'password',
         'user_type',
         'genders',
         'telephone',
+        'api_token',
         'fk_localities',
         'fk_user_status'
     ];
@@ -30,5 +33,6 @@ class Users extends Model
      * @var array
      */
     protected $hidden = [
+        'password'
     ];
 }

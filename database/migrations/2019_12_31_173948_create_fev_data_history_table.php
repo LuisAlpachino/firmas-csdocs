@@ -16,7 +16,7 @@ class CreateFevDataHistoryTable extends Migration
         Schema::create('data_history', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('fk_users');
-            $table->string('History_action');
+            $table->string('history_action');
             $table->dateTime('date_history');
             $table->string('situation');
             $table->timestamps();

@@ -16,7 +16,7 @@ class CreateFevDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->dateTime('creation_date');
+            $table->string('src_document');
             $table->string('status_document');
             $table->string('validity');
             $table->unsignedBigInteger('fk_users');
