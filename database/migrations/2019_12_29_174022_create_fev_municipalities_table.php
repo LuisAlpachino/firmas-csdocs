@@ -16,10 +16,13 @@ class CreateFevMunicipalitiesTable extends Migration
         Schema::create('municipalities', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->string('name');
             $table->unsignedBigInteger('fk_states');
-            $table->foreign('fk_states')->references('id')->on('states');
+            $table->string('clave');
+            $table->string('name');
+            $table->integer('activo');
             $table->timestamps();
+
+            $table->foreign('fk_states')->references('id')->on('states');
 
         });
     }
