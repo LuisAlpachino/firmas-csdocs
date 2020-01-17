@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    public function setUser(Request $request){
+    public function createUser(Request $request){
         if($request->isJson()){
             $data = $request->json()->all();
             $user = Users::create([
@@ -23,6 +23,7 @@ class UserController extends Controller
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'genders' => $data['genders'],
+                'user_type' => $data['user_type'],
                 'api_token' => Str::random(60),
                 'telephone' => $data['telephone'],
                 'fk_localities' => $data['fk_localities'],
@@ -83,7 +84,7 @@ class UserController extends Controller
                 response()->json(['error'=> 'No content'],406);
             }
         }
-        
+
         return response()->json(['error' => 'Unauthorized'],'401');
 
     }

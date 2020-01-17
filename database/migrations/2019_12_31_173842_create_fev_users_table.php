@@ -24,9 +24,9 @@ class CreateFevUsersTable extends Migration
             $table->string('password');
             $table->integer('user_type');
             $table->integer('genders');
-            $table->string('keycer');
-            $table->string('keyprivate');
-            $table->string('keypublic');
+            $table->string('keycer')->default('NULL');
+            $table->string('keyprivate')->default('NULL');
+            $table->string('keypublic')->default('NULL');
             $table->rememberToken();
             $table->String('api_token', 60)->unique();
             $table->unsignedBigInteger('telephone');

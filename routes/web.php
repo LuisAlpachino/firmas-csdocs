@@ -18,18 +18,20 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/key', function () use ($router){
-   return  base64_encode(Str::random(32));
+   return  Str::random(32);
 });
 
+$router->post('login', 'UserController@getToken');
+$router->post('createUser','UserController@createUser');
+
 //Rutas para CRUD USERS
-$router->group(['prefix' => 'user', 'middleware' => ['auth']], function() use ($router){
+$router->group(['middleware' => ['auth']], function() use ($router){
    //url "/user/"
-    $router->post('setUser','UserController@setUser');
-    $router->post('login', 'UserController@getToken');
     $router->get('getUsers', 'UserController@getUsers');
     $router->get('getUsers/{id}', 'UserController@getUserById');
     $router->put('update/{id}', 'UserController@updateById');
     $router->delete('delete/{id}', 'UserController@deleteById');
+
 });
 
 //Rutas para CRUD DOCUMENTS
