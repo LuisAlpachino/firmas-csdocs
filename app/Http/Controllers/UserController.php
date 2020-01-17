@@ -11,32 +11,7 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-<<<<<<< HEAD
     public function createUser(Request $request){
-=======
-    public function index()
-    {
-        if (request()->has('empty')){
-            $users=[];
-        }
-        else {
-            $users= [
-                'Diana',
-                'Juan',
-                'Luis',
-                'Rafael',
-            ];
-        }
-
-        $title='Listado de usuarios';
-
-        return view('users', compact('title','users'));
-    }
-
-
-
-    public function setUser(Request $request){
->>>>>>> 5dfe80bbfad8865c72977177f68f1a97c4eacc39
         if($request->isJson()){
             $data = $request->json()->all();
             $user = Users::create([
@@ -52,7 +27,7 @@ class UserController extends Controller
                 'api_token' => Str::random(60),
                 'telephone' => $data['telephone'],
                 'fk_localities' => $data['fk_localities'],
-                'fk_user_status' => $data['fk_user_status'],
+                'fk_user_status' => $data['fk_user_status']
             ]);
             return response()->json($user,201);
         }
