@@ -11,9 +11,11 @@
 |
 */
 
+
+/** @var TYPE_NAME $factory */
 $factory->define(App\Users::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'email' => $faker->email,
+        'email' => $faker->unique()->safeEmail,
     ];
 });

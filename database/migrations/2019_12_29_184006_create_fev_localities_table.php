@@ -16,21 +16,13 @@ class CreateFevLocalitiesTable extends Migration
         Schema::create('localities', function (Blueprint $table) {
 
             $table->bigIncrements('id');
+            $table->string('name',90);
+            $table->char('zip_code', 5)->nullable();
+            $table->string('tipo_asentamiento', 50);
+            $table->string('city',50)->nullable();
+            $table->string('zona',50)->nullable();
+            $table->string('clave_ciudad',5)->nullable();
             $table->unsignedBigInteger('fk_municipalities');
-            $table->string('clave', 4);
-            $table->string('name');
-            $table->string('latitud');
-            $table->string('longitud');
-            $table->string('altitud');
-            $table->string('carta');
-            $table->string('ambito');
-            $table->bigInteger('poblacion');
-            $table->bigInteger('masculino');
-            $table->bigInteger('femenino');
-            $table->bigInteger('viviendas');
-            $table->string('lat');
-            $table->string('lng');
-            $table->integer('activo');
             //$table->integer('zip_code');
 
             $table->timestamps();

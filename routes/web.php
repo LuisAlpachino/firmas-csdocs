@@ -23,16 +23,28 @@ $router->get('/key', function () use ($router){
 
 $router->post('login', 'UserController@getToken');
 $router->post('createUser','UserController@createUser');
+$router->get('getUsers/{id}', 'UserController@getUserById');
+$router->put('update/{id}', 'UserController@updateById');
+$router->delete('delete/{id}', 'UserController@deleteById');
+$router->get('getUsers', 'UserController@getUsers');
 
-//Rutas para CRUD USERS
-$router->group(['middleware' => ['auth']], function() use ($router){
-   //url "/user/"
-    $router->get('getUsers', 'UserController@getUsers');
-    $router->get('getUsers/{id}', 'UserController@getUserById');
-    $router->put('update/{id}', 'UserController@updateById');
-    $router->delete('delete/{id}', 'UserController@deleteById');
 
+//documentos iniciales
+$router->get('obtenerFirma','DocumentController@upload');
+
+
+//Catalogos
+$router->post('estados','LocalidadesController@importEstados');
+$router->post('municipios','LocalidadesController@importMunicipios');
+$router->post('localidades','LocalidadesController@importLocalidades');
+
+//rutas para Dirección
+$router->group(['prefix' => 'addresses'], function () use($router){
+    $router->get('getStates','LocalidadesController@getStates');
+    $router->get('getMunicipalitiesById/{id}','LocalidadesController@getMunicipalitiesById');
+    $router->get('getLocalitiesByCP/{id}','LocalidadesController@getLocalitiesByCP');
 });
+
 
 //Rutas para CRUD DOCUMENTS
 $router->group(['prefix' => 'documents'], function() use ($router){
@@ -42,7 +54,7 @@ $router->group(['prefix' => 'documents'], function() use ($router){
     $router->get('getDocuments/{id}', 'DocumentController@getDocumentById');
     $router->put('update/{id}', 'DocumentController@updateById');
     $router->delete('delete/{id}', 'DocumentController@deleteById');
-
+    $router->get('getConstancia', 'DocumentController@getContancia');
 });
 
 //Apis Externas
@@ -50,9 +62,13 @@ $router->group(['prefix' => 'api'], function() use ($router){
     //url "/api/"
     $router->get('rfc/{id}','ApisExternaController@rfc');
     $router->get('cp/{id}','ApisExternaController@cp');
+    $router->get('curp/{id}', 'ApisExternaController@curp');
 });
 
-
+//Rutas para CRUD USERS
+$router->group(['middleware' => ['auth']], function() use ($router){
+    //url "/user/"
+});
 //Vista
 
 

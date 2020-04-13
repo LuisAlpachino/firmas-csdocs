@@ -19,7 +19,6 @@ class CreateFevMunicipalitiesTable extends Migration
             $table->unsignedBigInteger('fk_states');
             $table->string('clave');
             $table->string('name');
-            $table->integer('activo');
             $table->timestamps();
 
             $table->foreign('fk_states')->references('id')->on('states');

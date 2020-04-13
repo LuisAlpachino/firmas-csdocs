@@ -6,6 +6,7 @@ require_once __DIR__.'/../vendor/autoload.php';
     dirname(__DIR__)
 ))->bootstrap();
 
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -21,11 +22,22 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+//Libreria para gestionar EXCEL,CSV
+$app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
+
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+
+//CORS en peteciones HTTP
+$app->middleware( \palanik\lumen\Middleware\LumenCors::class);
+
+$app->register(\Elibyy\TCPDF\ServiceProvider::class);
+
+//ALIAS TCPDF
+class_alias('\Elibyy\TCPDF\Facades\TCPDF','PDF');
+
 $app->withFacades();
 
 $app->withEloquent();
-
-$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -66,6 +78,7 @@ $app->singleton(
      'auth' => App\Http\Middleware\Authenticate::class,
  ]);
 
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -77,9 +90,9 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+//$app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+//$app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

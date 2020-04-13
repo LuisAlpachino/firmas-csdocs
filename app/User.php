@@ -2,10 +2,15 @@
 
 namespace App;
 
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Lumen\Auth\Authorizable;
 
-class Users extends Model
+class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
+    use Authenticatable, Authorizable;
     /**
      * The attributes that are mass assignable.
      *
@@ -17,6 +22,7 @@ class Users extends Model
         'second_last_name',
         'rfc',
         'curp',
+        //'birthday',
         'email',
         'password',
         'user_type',
@@ -24,6 +30,7 @@ class Users extends Model
         'telephone',
         'api_token',
         'fk_localities',
+        'address',
         'fk_user_status'
     ];
 

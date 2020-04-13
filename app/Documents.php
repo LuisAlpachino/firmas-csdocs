@@ -10,7 +10,6 @@ class Documents extends Model
 {
     protected $fillable = [
         'name',
-        'creation_date',
         'src_document',
         'status_document',
         'validity',
